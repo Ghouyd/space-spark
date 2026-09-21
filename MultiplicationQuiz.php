@@ -1,0 +1,461 @@
+<?php
+session_start();
+$totalPoints = $_SESSION["points"] ?? 0;
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Multiplication</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  color: white;
+  background: #050b25;
+  overflow: hidden;
+}
+
+/* خلفية فضاء */
+.space-page {
+  min-height: 100vh;
+  position: relative;
+  background:
+    radial-gradient(circle at 20% 25%, rgba(124, 58, 237, .45), transparent 25%),
+    radial-gradient(circle at 85% 20%, rgba(0, 183, 255, .35), transparent 22%),
+    linear-gradient(180deg, #05091f 0%, #071943 55%, #170035 100%);
+}
+
+/* نجوم */
+.space-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(white 1px, transparent 1px),
+    radial-gradient(#ffd76b 1.3px, transparent 1.3px),
+    radial-gradient(#7dd3fc 1px, transparent 1px);
+  background-size: 70px 70px, 130px 130px, 180px 180px;
+  opacity: .8;
+}
+
+
+/* صورة/سطح فضاء تحت */
+.moon-ground {
+  position: absolute;
+  bottom: -90px;
+  left: -5%;
+  width: 110%;
+  height: 250px;
+  border-radius: 50% 50% 0 0;
+  background:
+    radial-gradient(circle at 20% 45%, #4b465b 0 18px, transparent 19px),
+    radial-gradient(circle at 45% 35%, #5f5870 0 24px, transparent 25px),
+    radial-gradient(circle at 70% 50%, #454056 0 20px, transparent 21px),
+    radial-gradient(circle at 85% 30%, #696176 0 18px, transparent 19px),
+    linear-gradient(180deg, #bcb5c9, #756d86);
+  box-shadow: inset 0 25px 45px rgba(255,255,255,.25);
+  z-index: 1;
+}
+
+/* سبلاش */
+#splash {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background:
+    radial-gradient(circle at 30% 20%, #4c1d95, transparent 25%),
+    linear-gradient(180deg, #020617, #071b45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.splash-card {
+  text-align: center;
+  padding: 50px 80px;
+  border-radius: 35px;
+  background: rgba(39, 12, 92, .65);
+  border: 2px solid #a855f7;
+  box-shadow: 0 0 50px rgba(168,85,247,.9);
+  animation: pop .8s ease;
+}
+
+
+.splash-card h1 {
+  font-size: 58px;
+  margin: 0;
+}
+
+.splash-card p {
+  font-size: 24px;
+}
+
+/* الصفحة الرئيسية */
+.game-wrap {
+  position: relative;
+  z-index: 3;
+  min-height: 100vh;
+  padding: 35px 60px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo h2 {
+  margin: 0;
+  font-size: 32px;
+}
+
+.logo p {
+  margin: 0;
+  opacity: .9;
+}
+
+.score-pill {
+  background: rgba(76, 29, 149, .85);
+  border: 2px solid #7c3aed;
+  border-radius: 28px;
+  padding: 14px 28px;
+  font-size: 30px;
+  font-weight: 900;
+  box-shadow: 0 0 25px rgba(124,58,237,.6);
+}
+
+.title {
+  text-align: center;
+  margin-top: 35px;
+}
+
+.title h1 {
+  font-size: 76px;
+  margin: 0;
+  text-shadow: 0 0 20px rgba(255,255,255,.35);
+}
+
+.title p {
+  font-size: 28px;
+  margin: 8px 0;
+}
+
+/* كرت اللعبة */
+.game-card {
+  width: 760px;
+  margin: 35px auto 0;
+  padding: 28px 36px 35px;
+  border-radius: 36px;
+  background: rgba(20, 8, 65, .78);
+  border: 3px solid #a855f7;
+  box-shadow:
+    0 0 45px rgba(168,85,247,.75),
+    inset 0 0 40px rgba(59,130,246,.16);
+}
+
+.level_4 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 28px;
+}
+
+.progress {
+  width: 260px;
+  height: 18px;
+  background: rgba(255,255,255,.2);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 2px solid rgba(255,255,255,.25);
+}
+
+.progress-fill {
+  height: 100%;
+  width: 10%;
+  background: linear-gradient(90deg, #84cc16, #22c55e);
+  border-radius: 20px;
+}
+
+.question {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  margin-bottom: 22px;
+}
+
+.number-box {
+  width: 135px;
+  height: 135px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, #fff, #e9eefc);
+  color: #111827;
+  display: grid;
+  place-items: center;
+  font-size: 78px;
+  font-weight: 900;
+  box-shadow: 0 10px 0 rgba(255,255,255,.35);
+}
+
+#num1 { color: #9333ea; }
+#num2 { color: #22c55e; }
+.qmark { color: #f97316; }
+
+.operator {
+  font-size: 78px;
+  font-weight: 900;
+}
+
+.instruction {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.option {
+  height: 95px;
+  border: none;
+  border-radius: 24px;
+  background: linear-gradient(180deg, #ffffff, #e9eefc);
+  font-size: 52px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 8px 0 rgba(255,255,255,.35);
+  transition: .2s;
+}
+
+.option:hover {
+  transform: translateY(-8px) scale(1.04);
+}
+
+.option:nth-child(1) { color: #0ea5e9; }
+.option:nth-child(2) { color: #22c55e; }
+.option:nth-child(3) { color: #f97316; }
+.option:nth-child(4) { color: #9333ea; }
+
+.message {
+  min-height: 32px;
+  margin-top: 18px;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.back-btn {
+  position: absolute;
+  left: 50px;
+  top: 120px;
+  color: white;
+  text-decoration: none;
+  background: rgba(76,29,149,.85);
+  border: 2px solid #7c3aed;
+  padding: 12px 24px;
+  border-radius: 24px;
+  font-size: 20px;
+  font-weight: bold;
+  z-index: 5;
+}
+
+#nextLevelBtn {
+  margin-top: 15px;
+  padding: 14px 28px;
+  border-radius: 22px;
+  border: none;
+  background: linear-gradient(90deg, #22c55e, #4ade80);
+  color: white;
+  font-size: 22px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 0 25px rgba(34,197,94,.8);
+}
+
+#nextLevelBtn:hover {
+  transform: scale(1.05);
+}
+
+@keyframes pop {
+  from { transform: scale(.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+</style>
+</head>
+
+<body>
+
+<section id="splash">
+  <div class="splash-card">
+   
+    <h1>Multiplication Quiz</h1> <!-- كود بداية لفل-->
+    <p>Let’s Multiply and have fun!</p>
+  </div>
+</section>
+
+<div class="space-page">
+  <div class="moon-ground"></div>
+
+  <a href="PracticeMulti.html" class="back-btn">← Back</a>
+
+  <main class="game-wrap">
+    <header class="topbar"> <!-- كود فوق باليسار-->
+      <div class="logo">
+        <h2>SpaceSpark</h2>
+        <p>Learn • Explore • Grow</p>
+      </div>
+
+<div class="score-pill">⭐ <span id="score"><?php echo $totalPoints; ?></span></div>
+    </header>
+
+    <section class="title">
+      <p>Numbers Planet</p>
+      <h1>Multiplication</h1>
+      <p>Let’s Multiply and have fun!</p>
+    </section>
+
+    <section class="game-card">  <!--بداية لعبة-->
+      <div class="level_4">
+        <span>⭐ Level 4</span>
+        <div class="progress"><div id="progressFill" class="progress-fill"></div></div>
+        <span id="levelText">1/5</span>
+      </div>
+
+      <div class="question">
+        <div class="number-box" id="num1">3</div>
+        <div class="operator">X</div>
+        <div class="number-box" id="num2">2</div>
+        <div class="operator">=</div>
+        <div class="number-box qmark">?</div>
+      </div>
+
+      <div class="instruction">Choose the correct answer</div>
+      <div class="options" id="options"></div>
+      <div class="message" id="message"></div>
+    </section>
+  </main>
+</div>
+
+<script>
+let num1, num2, correct;
+let score = 120;
+let level = 1;
+let questionCount = 0;
+let gameFinished = false;
+
+function generateQuestion() {
+  if (gameFinished) return;
+
+  num1 = Math.floor(Math.random() * 9) + 1; 
+  num2 = Math.floor(Math.random() * 9) + 1;
+
+  correct = num1 * num2;
+
+  document.getElementById("num1").textContent = num1;
+  document.getElementById("num2").textContent = num2;
+
+  let answers = [correct];
+
+  while (answers.length < 4) {
+    let wrong = Math.floor(Math.random() * 81) + 1;
+    if (!answers.includes(wrong)) answers.push(wrong);
+  }
+
+  answers.sort(() => Math.random() - 0.5);
+
+  const options = document.getElementById("options");
+  options.innerHTML = "";
+
+  answers.forEach(answer => {
+    const btn = document.createElement("button");
+    btn.className = "option";
+    btn.textContent = answer;
+    btn.onclick = () => checkAnswer(answer);
+    options.appendChild(btn);
+  });
+}
+
+function checkAnswer(answer) {
+  if (gameFinished) return;
+
+  const message = document.getElementById("message");
+
+  if (answer === correct) {
+ 
+    questionCount++;
+
+    message.textContent = "Correct! Great job!";
+    let correctSound = new Audio("correct.MP4");
+      correctSound.play();
+
+    message.style.color = "#22c55e";
+
+    fetch("add_points.php", {
+  method: "POST"
+})
+.then(res => res.text())
+.then(points => {
+  document.getElementById("score").textContent = points;
+});
+    document.getElementById("levelText").textContent = questionCount + "/5";
+    document.getElementById("progressFill").style.width = (questionCount * 10) + "%";
+
+    //نفس حق الادشن
+   if (questionCount === 5) {
+  gameFinished = true;
+
+  document.querySelector(".question").style.display = "none";
+  document.querySelector(".instruction").style.display = "none";
+  document.getElementById("options").style.display = "none";
+
+  document.getElementById("progressFill").style.width = "100%";
+
+  message.innerHTML = `
+    <div style="text-align:center;">
+      <h2 style="color:#22c55e;">🎉 You Win! 🎉</h2>
+      <p style="color:white;">You can go to the next level now!</p>
+      <button id="nextLevelBtn">Next Level</button>
+    </div>
+  `;
+
+  document.getElementById("nextLevelBtn").onclick = () => {
+    window.location.href = "leveldiv.html";
+  };
+
+  return;
+}
+
+if (questionCount < 5) {
+  setTimeout(generateQuestion, 650);
+}
+
+  } else {
+    message.textContent = "Try again!";
+    let wrongSound = new Audio("tryagain.MP4");
+    wrongSound.play();
+    message.style.color = "#f97316";
+  }
+}
+
+window.onload = () => {
+  setTimeout(() => {
+    document.getElementById("splash").style.display = "none";
+    generateQuestion();
+  }, 1800);
+};
+</script>
+
+</body>
+</html>
