@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Space Park</title>
+  <link rel="stylesheet" href="space.css" />
+</head>
+<body>
+<!-- Splash Screen -->
+<section id="splash" class="splash">
+  <div class="splash-overlay"></div>
+  <div class="splash-content">
+    <div class="brand-mark">✦</div>
+   <h1 class="splash-logo" style=" font-size:100px;">
+ <span class="spark-word">S</span>pace
+  <span class="spark-word">S</span>park
+
+ 
+  <span class="twinkle t1">✦</span>
+  <span class="twinkle t2">✦</span>
+  <span class="twinkle t3">✦</span>
+</h1>
+    <p class="splash-tagline">Learn • Explore • Grow</p>
+  </div>
+</section>
+
+
+  <!-- Main Page -->
+  <main id="mainPage" class="page hidden">
+    <div class="page-overlay"></div>
+
+    <header class="topbar">
+        <div class="logo-text">
+          <h1>SpaceSpark</h1>
+          <p>Learn • Explore • Grow</p>
+        </div>
+      
+
+      <nav class="nav">
+        <a href="#" class="active"> Home</a>
+        
+        <a href="Profile.html"> Profile</a>
+      </nav>
+
+      <div class="stars-box"><h1>⭐ 120</h1>
+        <img src="profile.png" alt="" width="70" width="70">      </div>
+    </header>
+
+    <section class="hero">
+      <h2>Let’s Learn and Explore!</h2>
+      <p class="subtitle">Choose a planet and start your adventure</p>
+    </section>
+
+    <section class="content-section">
+      <div class="moveRight"></div>
+
+      <div class="planets-grid">
+        <article class="planet-card">
+          <div class="planet-image-wrap">
+           <a href="Levels.html"><img src="numbers.png" alt="Numbers Planet" /> </a> 
+          </div>
+          <div class="planet-btn blue">Numbers Planet</div>
+          <p>Learn numbers, counting, and have fun with math!</p>
+        </article>
+
+        <article class="planet-card">
+          <div class="planet-image-wrap">
+            <img src="letters.png" alt="Letters Planet" />
+          </div>
+          <div class="planet-btn purple">Letters Planet</div>
+          <p>Discover letters, words, and build your vocabulary!</p>
+        </article>
+
+        <article class="planet-card">
+          <div class="planet-image-wrap">
+            <img src="animals2.png" alt="Animals Planet" />
+          </div>
+          <div class="planet-btn green">Animals Planet</div>
+          <p>Meet amazing animals and learn about their world!</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const splash = document.getElementById("splash");
+    const mainPage = document.getElementById("mainPage");
+
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        splash.classList.add("fade-out");
+        mainPage.classList.remove("hidden");
+        mainPage.classList.add("show");
+
+        setTimeout(() => {
+          splash.style.display = "none";
+        }, 900);
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
