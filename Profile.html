@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SpaceSpark Profile</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  color:white;
+  min-height:100vh;
+  background:
+    linear-gradient(rgba(5,10,35,0.45), rgba(5,10,35,0.65)),
+    url("background.png");
+  background-size:cover;
+  background-position:center;
+  overflow-y:auto;
+  overflow-x:hidden;
+}
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 45px;
+}
+
+.logo-text h1{
+  margin:0;
+  font-size:30px;
+}
+
+.logo-text p{
+  margin:0;
+  font-size:15px;
+  opacity:0.9;
+}
+
+.nav{
+  background:rgba(70,20,130,0.75);
+  padding:12px 24px;
+  border-radius:35px;
+  border:2px solid rgba(180,120,255,0.5);
+  box-shadow:0 0 20px rgba(160,90,255,0.35);
+}
+
+.nav a{
+  color:white;
+  text-decoration:none;
+  margin:0 14px;
+  font-size:17px;
+  font-weight:bold;
+}
+
+.nav a.active{
+  background:#6d8cff;
+  padding:10px 18px;
+  border-radius:25px;
+}
+
+.profile-container{
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:8px 20px 20px;
+}
+
+.profile-card{
+  width:780px;
+  padding:20px 22px 18px;
+  border-radius:35px;
+  position:relative;
+  background:rgba(20,10,55,0.78);
+  border:2px solid rgba(255,216,77,0.45);
+  box-shadow:
+    0 0 35px rgba(255,216,77,0.25),
+    0 0 60px rgba(125,80,255,0.25);
+  backdrop-filter:blur(12px);
+  text-align:center;
+}
+
+.profile-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:15px;
+}
+
+.profile-info{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  text-align:left;
+}
+
+.profile-img{
+  width:95px;
+  height:95px;
+  border-radius:50%;
+  border:4px solid #ffd84d;
+  box-shadow:0 0 25px rgba(255,216,77,0.6);
+}
+
+.profile-card h2{
+  font-size:34px;
+  margin:0;
+}
+
+.role{
+  font-size:16px;
+  opacity:0.9;
+  margin:5px 0 0;
+}
+
+.stat-box{
+  width:190px;
+  background:rgba(255,255,255,0.1);
+  border:2px solid rgba(255,255,255,0.18);
+  border-radius:24px;
+  padding:14px;
+}
+
+.stat-box h3{
+  margin:0;
+  font-size:32px;
+  color:#ffd84d;
+}
+
+.stat-box p{
+  margin:6px 0 0;
+  font-size:15px;
+}
+
+.planets-profile{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+  margin-top:12px;
+}
+
+.planet-profile-card{
+  background:rgba(255,255,255,0.1);
+  border:2px solid rgba(255,255,255,0.18);
+  border-radius:28px;
+  padding:10px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.planet-profile-card:hover{
+  transform:translateY(-6px) scale(1.03);
+  box-shadow:0 0 25px rgba(255,216,77,0.35);
+}
+
+.planet-profile-card img{
+  width:85px;
+  height:85px;
+  object-fit:contain;
+}
+
+.planet-profile-card h3{
+  margin:6px 0 0;
+  font-size:19px;
+}
+
+.planet-details{
+  margin-top:16px;
+  padding:16px 20px;
+  border-radius:28px;
+  background:rgba(255,255,255,0.1);
+  border:2px solid rgba(255,255,255,0.18);
+  text-align:left;
+}
+
+.planet-details h3{
+  margin:0 0 8px;
+  font-size:24px;
+}
+
+.planet-details p{
+  font-size:15px;
+  margin:6px 0;
+}
+
+.bar{
+  width:100%;
+  height:14px;
+  background:rgba(255,255,255,0.15);
+  border-radius:30px;
+  overflow:hidden;
+  margin-top:10px;
+}
+
+.fill{
+  height:100%;
+  border-radius:30px;
+}
+
+.numbers{
+  background:linear-gradient(90deg,#38bdf8,#2563eb);
+}
+
+.letters{
+  background:linear-gradient(90deg,#d946ef,#9333ea);
+}
+
+.animals{
+  background:linear-gradient(90deg,#84cc16,#22c55e);
+}
+
+.back-btn{
+  display:inline-block;
+  margin-top:16px;
+  padding:11px 26px;
+  border-radius:35px;
+  background:linear-gradient(135deg,#ffd84d,#ff9f43);
+  color:#08122e;
+  text-decoration:none;
+  font-weight:bold;
+  font-size:16px;
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="logo-text">
+    <h1>SpaceSpark</h1>
+    <p>Learn • Explore • Grow</p>
+  </div>
+
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="profile.html" class="active">Profile</a>
+  </nav>
+</header>
+
+<section class="profile-container">
+
+<div class="profile-card">
+
+  <div class="profile-header">
+
+    <div class="profile-info">
+      <img src="profile.png" class="profile-img">
+
+      <div>
+        <h2 id="profileName">Astronaut</h2>
+        
+      </div>
+    </div>
+
+    <div class="stat-box">
+      <h3 id="totalStars">0</h3>
+      <p>Total Stars ⭐</p>
+    </div>
+
+  </div>
+
+  <div class="planets-profile">
+
+    <div class="planet-profile-card" onclick="showPlanet('numbers')">
+      <img src="numbers.png">
+      <h3>Numbers Planet</h3>
+    </div>
+
+    <div class="planet-profile-card" onclick="showPlanet('letters')">
+      <img src="letters.png">
+      <h3>Letters Planet</h3>
+    </div>
+
+    <div class="planet-profile-card" onclick="showPlanet('animals')">
+      <img src="animals2.png">
+      <h3>Animals Planet</h3>
+    </div>
+
+  </div>
+
+  <div class="planet-details" id="planetDetails">
+    <h3>Choose a planet </h3>
+    <p>Select a planet to view progress ⭐</p>
+  </div>
+
+  <a href="index.html" class="back-btn">⬅ Back Home</a>
+
+</div>
+
+</section>
+
+<script>
+const username = localStorage.getItem("username") || "Astronaut";
+
+document.getElementById("profileName").innerText = username;
+
+let totalStars = localStorage.getItem("stars") || 0;
+document.getElementById("totalStars").innerText = totalStars;
+
+fetch("get_score.php?username=" + encodeURIComponent(username))
+.then(response => response.json())
+.then(data => {
+  document.getElementById("totalStars").innerText = data.stars;
+  localStorage.setItem("stars", data.stars);
+  localStorage.setItem("unlocked_level", data.unlocked_level);
+})
+.catch(() => {});
+
+function showPlanet(planet){
+  const box = document.getElementById("planetDetails");
+
+  if(planet === "numbers"){
+    let unlocked = Number(localStorage.getItem("unlocked_level")) || 1;
+    let progress = unlocked * 20;
+
+    box.innerHTML = `
+      <h3>Numbers Planet</h3>
+      <p>Highest Level: ${unlocked} / 5</p>
+      <p>Progress: ${progress}%</p>
+      <div class="bar">
+        <div class="fill numbers" style="width:${progress}%"></div>
+      </div>
+    `;
+  }
+
+  if(planet === "letters"){
+    box.innerHTML = `
+      <h3>Letters Planet</h3>
+      <p>Highest Level: 0 / 4</p>
+      <p>Progress: 0%</p>
+      <div class="bar">
+        <div class="fill letters" style="width:0%"></div>
+      </div>
+    `;
+  }
+
+  if(planet === "animals"){
+    box.innerHTML = `
+      <h3>Animals Planet</h3>
+      <p>Highest Level: 0 / 4</p>
+      <p>Progress: 0%</p>
+      <div class="bar">
+        <div class="fill animals" style="width:0%"></div>
+      </div>
+    `;
+  }
+}
+</script>
+
+</body>
+</html>
