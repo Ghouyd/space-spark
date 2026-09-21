@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Division Practice</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  color: white;
+  background: #050b25;
+  overflow: hidden;
+}
+
+.space-page {
+  min-height: 100vh;
+  position: relative;
+  background:
+    radial-gradient(circle at 20% 25%, rgba(124, 58, 237, .45), transparent 25%),
+    radial-gradient(circle at 85% 20%, rgba(0, 183, 255, .35), transparent 22%),
+    linear-gradient(180deg, #05091f 0%, #071943 55%, #170035 100%);
+}
+
+.space-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(white 1px, transparent 1px),
+    radial-gradient(#ffd76b 1.3px, transparent 1.3px),
+    radial-gradient(#7dd3fc 1px, transparent 1px);
+  background-size: 70px 70px, 130px 130px, 180px 180px;
+  opacity: .8;
+}
+
+.moon-ground {
+  position: absolute;
+  bottom: -115px;
+  left: -6%;
+  width: 112%;
+  height: 285px;
+  border-radius: 50% 50% 0 0;
+  background:
+    radial-gradient(circle at 8% 68%, rgba(82, 76, 105, .55) 0 22px, transparent 24px),
+    radial-gradient(circle at 18% 58%, rgba(95, 88, 120, .65) 0 28px, transparent 31px),
+    radial-gradient(circle at 31% 67%, rgba(75, 70, 95, .5) 0 20px, transparent 23px),
+    radial-gradient(circle at 45% 45%, rgba(107, 100, 130, .7) 0 30px, transparent 33px),
+    radial-gradient(circle at 58% 63%, rgba(78, 72, 98, .5) 0 18px, transparent 21px),
+    radial-gradient(circle at 72% 52%, rgba(98, 90, 118, .6) 0 25px, transparent 28px),
+    radial-gradient(circle at 86% 66%, rgba(72, 66, 92, .5) 0 21px, transparent 24px),
+    linear-gradient(180deg, #d5d0df 0%, #b6afc7 45%, #857d98 100%);
+  box-shadow:
+    inset 0 28px 45px rgba(255,255,255,.28),
+    inset 0 -18px 35px rgba(52,45,74,.35);
+  z-index: 1;
+}
+
+#splash {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: linear-gradient(180deg, #020617, #071b45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.splash-card {
+  text-align: center;
+  padding: 50px 80px;
+  border-radius: 35px;
+  background: rgba(39, 12, 92, .65);
+  border: 2px solid #a855f7;
+  box-shadow:
+    0 0 25px rgba(168,85,247,.7),
+    0 0 60px rgba(168,85,247,.6),
+    0 0 100px rgba(168,85,247,.5);
+}
+
+.splash-card h1 {
+  font-size: 58px;
+  margin: 0;
+}
+
+.splash-card p {
+  font-size: 24px;
+}
+
+.game-wrap {
+  position: relative;
+  z-index: 3;
+  min-height: 100vh;
+  padding: 35px 60px;
+}
+
+.back-btn {
+  position: absolute;
+  left: 50px;
+  top: 120px;
+  color: white;
+  text-decoration: none;
+  background: rgba(76,29,149,.85);
+  border: 2px solid #7c3aed;
+  padding: 12px 24px;
+  border-radius: 24px;
+  font-size: 20px;
+  font-weight: bold;
+  z-index: 5;
+}
+
+.title {
+  text-align: center;
+  margin-top: 35px;
+}
+
+.title h1 {
+  font-size: 58px;
+  margin: 0;
+}
+
+.title p {
+  font-size: 22px;
+  margin: 8px 0;
+}
+
+.practice-area {
+  width: 980px;
+  margin: 35px auto 0;
+  text-align: center;
+}
+
+.question {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+  margin-bottom: 30px;
+}
+
+.star-group {
+  width: 180px;
+  min-height: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  color: #facc15;
+  font-size: 34px;
+  gap: 6px;
+  padding: 8px 12px;
+}
+
+.total-stars {
+  width: 280px;
+  font-size: 30px;
+}
+
+.operator {
+  width: 60px;
+  font-size: 56px;
+  font-weight: 900;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 6px;
+}
+
+.division-sign {
+  font-size: 52px;
+  transform: translateY(-3px);
+}
+
+.qmark {
+  font-size: 70px;
+  color: #f97316;
+}
+
+.instruction {
+  font-size: 22px;
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 650px;
+  margin: 0 auto;
+  gap: 18px;
+}
+
+.option {
+  min-height: 75px;
+  border: none;
+  border-radius: 26px;
+  background: rgba(255,255,255,.12);
+  border: 2px solid rgba(255,255,255,.35);
+  color: #facc15;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.option:hover {
+  transform: translateY(-6px) scale(1.03);
+  background: rgba(168,85,247,.28);
+}
+
+.message {
+  min-height: 34px;
+  margin-top: 20px;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.next-btn {
+  margin-top: 15px;
+  padding: 14px 30px;
+  border: none;
+  border-radius: 24px;
+  background: linear-gradient(90deg, #7c3aed, #38bdf8);
+  color: white;
+  font-size: 22px;
+  font-weight: 900;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<section id="splash">
+  <div class="splash-card">
+    <h1>Division Practice</h1>
+    <p>Let’s share the stars!</p>
+  </div>
+</section>
+
+<div class="space-page">
+  <div class="moon-ground"></div>
+
+  <a href="leveldiv.html" class="back-btn">← Back</a>
+
+  <main class="game-wrap">
+
+    <section class="title">
+      <h1>Division Practice</h1>
+      <p>Divide the stars evenly</p>
+    </section>
+
+    <section class="practice-area">
+      <div class="question">
+        <div class="star-group total-stars" id="stars1"></div>
+        <div class="operator division-sign">÷</div>
+        <div class="star-group" id="stars2"></div>
+        <div class="operator">=</div>
+        <div class="qmark">?</div>
+      </div>
+
+      <div class="instruction">Choose the correct group</div>
+      <div class="options" id="options"></div>
+      <div class="message" id="message"></div>
+
+      <button class="next-btn" onclick="nextQuestion()">Next →</button>
+    </section>
+
+  </main>
+</div>
+
+<script>
+let num1, num2, correct;
+let questionCount = 0;
+let maxQuestions = 5;
+let answered = false;
+let usedQuestions = [];
+
+const questions = [
+  [4, 2],
+  [6, 2],
+  [6, 3],
+  [8, 2],
+  [8, 4],
+  [9, 3]
+];
+
+function makeStars(number) {
+  return "⭐".repeat(number);
+}
+
+function generateQuestion() {
+  answered = false;
+
+  let q;
+  let key;
+
+  do {
+    q = questions[Math.floor(Math.random() * questions.length)];
+    num1 = q[0];
+    num2 = q[1];
+    key = num1 + "÷" + num2;
+  } while (usedQuestions.includes(key));
+
+  usedQuestions.push(key);
+  correct = num1 / num2;
+
+  document.getElementById("stars1").textContent = makeStars(num1);
+  document.getElementById("stars2").textContent = makeStars(num2);
+  document.getElementById("message").textContent = "";
+
+  let answers = [correct];
+
+  while (answers.length < 4) {
+    let wrong = Math.floor(Math.random() * 5) + 1;
+    if (!answers.includes(wrong)) answers.push(wrong);
+  }
+
+  answers.sort(() => Math.random() - 0.5);
+
+  const options = document.getElementById("options");
+  options.innerHTML = "";
+
+  answers.forEach(answer => {
+    const btn = document.createElement("button");
+    btn.className = "option";
+    btn.textContent = makeStars(answer);
+    btn.onclick = () => checkAnswer(answer);
+    options.appendChild(btn);
+  });
+}
+
+function checkAnswer(answer) {
+  if (answered) return;
+
+  const message = document.getElementById("message");
+
+  if (answer === correct) {
+    message.textContent = "Great job!";
+    message.style.color = "#22c55e";
+    answered = true;
+  } else {
+    message.textContent = "Try again!";
+    message.style.color = "#f97316";
+  }
+}
+
+function nextQuestion() {
+  if (!answered) {
+    const message = document.getElementById("message");
+    message.textContent = "Answer first!";
+    message.style.color = "#f97316";
+    return;
+  }
+
+  questionCount++;
+
+  if (questionCount >= maxQuestions) {
+    document.querySelector(".practice-area").innerHTML = `
+      <h1>Awesome!</h1>
+      <p>You finished the practice!</p>
+      <button class="next-btn" onclick="goToQuiz()">Go to Quiz</button>
+    `;
+    return;
+  }
+
+  generateQuestion();
+}
+
+function goToQuiz() {
+  window.location.href = "DivisionQuiz.html";
+}
+
+window.onload = () => {
+  setTimeout(() => {
+    document.getElementById("splash").style.display = "none";
+    generateQuestion();
+  }, 1500);
+};
+</script>
+
+</body>
+</html>
