@@ -72,4 +72,4 @@ Team Web Development Project
 
 ## Presentation
 
-[View the project presentation](./Space-Spark.pdf)
+View the project presentation
