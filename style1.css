@@ -1,0 +1,46 @@
+body {
+  text-align: center;
+  font-family: Arial;
+  background: linear-gradient(#0b1a3a, #1e2a5a);
+  color: white;
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+  padding: 20px;
+}
+
+.card {
+  background: #ffffff20;
+  padding: 10px;
+  background:
+    linear-gradient(rgba(10, 7, 35, 0.25), rgba(10, 7, 35, 0.35)),
+    url("background.png") center/cover no-repeat;
+   
+  border-radius: 15px;
+}
+
+
+
+button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.card img{
+    height: 250px;
+    width: 200px;
+}
