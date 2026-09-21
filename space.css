@@ -1,0 +1,367 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+}
+
+body {
+  background: #07051a;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* Splash */
+.splash {
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(rgba(10, 7, 35, 0.25), rgba(10, 7, 35, 0.35)),
+    url("background.png") center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.9s ease, visibility 0.9s ease;
+}
+
+.splash.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.splash-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.splash-content {
+  position: relative;
+  text-align: center;
+  z-index: 2;
+}
+
+/* كلمة Spark تلمع */
+.spark-word {
+  color: #ffd700;
+  text-shadow: 0 0 8px #ffd700, 0 0 16px #fff;
+  animation: glowPulse 2s infinite ease-in-out;
+}
+
+.brand-mark {
+  font-size: 30px;
+  margin-bottom: 10px;
+  color: #ffd700;
+}
+
+/* النجوم */
+.twinkle {
+  position: absolute;
+  color: #fff7cc;
+  font-size: 20px;
+  opacity: 0;
+  animation: twinkleAnim 2s infinite ease-in-out;
+  text-shadow: 0 0 8px #fff, 0 0 16px #ffd700;
+}
+
+.t1 {
+  top: -10px;
+  left: 48%;
+  animation-delay: 0.2s;
+}
+
+.t2 {
+  top: 15px;
+  right: -15px;
+  animation-delay: 0.8s;
+}
+
+.t3 {
+  bottom: -10px;
+  left: 70%;
+  animation-delay: 1.3s;
+}
+
+/* tagline */
+.splash-tagline {
+  margin-top: 15px;
+  font-size: 1.2rem;
+  color: #cccccc;
+}
+
+/* أنيميشن */
+@keyframes glowPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes twinkleAnim {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+}
+
+/* Main page */
+.page {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  background:
+    linear-gradient(rgba(10, 7, 35, 0.08), rgba(10, 7, 35, 0.16)),
+    url("background.png") center/cover no-repeat;
+  padding: 28px 40px 36px;
+}
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: block;
+  animation: fadeIn 0.8s ease;
+}
+
+.page-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.05), rgba(0,0,0,0.12));
+  pointer-events: none;
+}
+
+/* Topbar */
+.topbar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav {
+  display: flex;
+  gap: 10px;
+  background: rgba(64, 18, 121, 0.78);
+  border: 2px solid rgba(160, 99, 255, 0.3);
+  border-radius: 999px;
+  padding: 10px 16px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+}
+
+.nav a {
+  text-decoration: none;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+.nav a.active,
+.nav a:hover {
+  background: linear-gradient(180deg, #7b82ff, #5f66ff);
+  box-shadow: 0 0 18px rgba(117, 125, 255, 0.35);
+}
+
+.stars-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  background: rgba(64, 18, 121, 0.78);
+  border: 2px solid rgba(160, 99, 255, 0.28);
+  border-radius: 999px;
+  font-size: medium;
+  padding: 8px 14px;   /* 👈 صغرنا البوكس */
+  min-width: fit-content;
+}
+
+.star-score {
+  font-weight: 900;
+  color: #ffe36a;
+  text-shadow: 0 0 10px rgba(255, 227, 106, 0.5);
+}
+
+.profile-pic {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  margin-top: 55px;
+}
+
+.hero h2 {
+  font-size: 5rem;
+  font-weight: 900;
+  line-height: 1.08;
+  margin-bottom: 10px;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.subtitle {
+  font-size: 1.8rem;
+  color: #f4eeff;
+}
+
+/* Content */
+.content-section {
+  position: relative;
+  z-index: 2;
+  margin-top: 35px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 30px;
+}
+
+.moveRight {
+  flex: 0 0 280px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.planets-grid {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.planet-card {
+  width: 300px;
+  text-align: center;
+}
+
+.planet-image-wrap {
+  width: 300px;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.planet-image-wrap img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 24px rgba(0,0,0,0.28));
+}
+
+.planet-btn {
+  margin: 12px auto 12px;
+  width: 280px;
+  padding: 16px 20px;
+  border-radius: 999px;
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.24);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+}
+
+.blue {
+  background: linear-gradient(180deg, #61b8ff, #4594ff);
+}
+
+.purple {
+  background: linear-gradient(180deg, #d56dff, #b24eff);
+}
+
+.green {
+  background: linear-gradient(180deg, #81dc5c, #5ecb58);
+}
+
+.planet-card p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #f7f2ff;
+  font-weight: 700;
+  padding: 0 12px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(1.01);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive */
+@media (max-width: 1300px) {
+  .hero h2 {
+    font-size: 4.2rem;
+  }
+
+  .planet-card,
+  .planet-image-wrap {
+    width: 260px;
+  }
+
+  .planet-btn {
+    width: 240px;
+  }
+}
+
+@media (max-width: 1100px) {
+  body {
+    overflow: auto;
+  }
+
+  .topbar,
+  .content-section,
+  .planets-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero h2 {
+    font-size: 3.2rem;
+  }
+
+  .nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .splash-logo {
+    font-size: 4rem;
+  }
+}
+
+.splash-logo {
+  position: relative;
+  display: inline-block;
+  font-size: 3rem;
+  font-weight: bold;
+  color: white;
+  letter-spacing: 2px;
+}
+
+.splash-logo span {
+  display: inline-block;
+}
