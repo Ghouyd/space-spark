@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Numbers Planet - Levels</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: radial-gradient(circle at top, #0b1a3a, #020617);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 25px;
+    }
+
+    .stars-box {
+      background: #ffffff20;
+      padding: 8px 15px;
+      border-radius: 20px;
+    }
+
+    .map {
+      position: relative;
+      height: 80vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    .path {
+      position: absolute;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(transparent, #3d22a0, transparent);
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .planet {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      transition: 0.3s;
+    }
+
+    .planet-inner {
+      text-align: center;
+    }
+
+    .unlocked {
+      background: radial-gradient(circle, #777f9e, #564e9c);
+      box-shadow: 0 0 25px #918d94;
+      cursor: pointer;
+    }
+
+    .unlocked:hover {
+      transform: scale(1.1);
+    }
+
+    .locked {
+      background: gray;
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .title {
+      display: block;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <h1>🪐 Numbers Planet</h1>
+
+  <div class="stars-box">
+    ⭐ <span id="starsCount">0</span>
+  </div>
+</header>
+
+<main class="map">
+
+  <div class="path"></div>
+
+  <!-- Basic -->
+  <div class="planet unlocked"
+       id="basic"
+       onclick="goLevel('basic')">
+
+    <div class="planet-inner">
+      <span class="title">Basic</span>
+    </div>
+
+  </div>
+
+  <!-- Addition -->
+  <div class="planet locked"
+       id="addition"
+       onclick="goLevel('addition')">
+
+    <div class="planet-inner">
+      🔒
+      <span class="title">Addition</span>
+    </div>
+
+  </div>
+
+  <!-- Subtraction -->
+  <div class="planet locked"
+       id="subtraction"
+       onclick="goLevel('subtraction')">
+
+    <div class="planet-inner">
+      🔒
+      <span class="title">Subtraction</span>
+    </div>
+
+  </div>
+
+  <!-- Multiplication -->
+  <div class="planet locked"
+       id="multiplication"
+       onclick="goLevel('multiplication')">
+
+    <div class="planet-inner">
+      🔒
+      <span class="title">Multiplication</span>
+    </div>
+
+  </div>
+
+  <!-- Division -->
+  <div class="planet locked"
+       id="division"
+       onclick="goLevel('division')">
+
+    <div class="planet-inner">
+      🔒
+      <span class="title">Division</span>
+    </div>
+
+  </div>
+
+</main>
+
+<script>
+
+let stars = localStorage.getItem("stars") || 0;
+
+document.getElementById("starsCount").innerText = stars;
+
+let levels = {
+
+  basic: true,
+
+  addition: false,
+
+  subtraction: false,
+
+  multiplication: false,
+
+  division: false
+};
+
+function updateUI() {
+
+  for (let level in levels) {
+
+    let el = document.getElementById(level);
+
+    if (levels[level]) {
+
+      el.classList.remove("locked");
+      el.classList.add("unlocked");
+
+      el.innerHTML = `
+        <div class="planet-inner">
+          <span class="title">
+            ${capitalize(level)}
+          </span>
+        </div>
+      `;
+
+    } else {
+
+      el.classList.remove("unlocked");
+      el.classList.add("locked");
+
+      el.innerHTML = `
+        <div class="planet-inner">
+          🔒
+          <span class="title">
+            ${capitalize(level)}
+          </span>
+        </div>
+      `;
+    }
+  }
+}
+
+updateUI();
+
+function goLevel(level) {
+
+  if (!levels[level]) return;
+
+  if (level === "basic") {
+    window.location.href = "BasicLevel.html";
+  }
+
+  if (level === "addition") {
+    window.location.href = "practiceadd.html";
+  }
+
+  if (level === "subtraction") {
+    window.location.href = "PracticeSub.html";
+  }
+
+  if (level === "multiplication") {
+    window.location.href = "PracticeMulti.html";
+  }
+
+  if (level === "division") {
+    window.location.href = "PracticeDiv.html";
+  }
+}
+
+function capitalize(text) {
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+</script>
+
+</body>
+</html>
+
+
