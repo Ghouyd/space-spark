@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Numbers Planet - Levels</title>
+
+  <style>
+
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: radial-gradient(circle at top, #0b1a3a, #020617);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 25px;
+    }
+
+    .stars-box {
+      background: #ffffff20;
+      padding: 8px 15px;
+      border-radius: 20px;
+    }
+
+    /* زر الهوم */
+
+    .home-wrap {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .home-btn {
+      padding: 18px 45px;
+      border: 3px solid #8b5cf6;
+      border-radius: 50px;
+      cursor: pointer;
+
+      background: linear-gradient(180deg, #7c3aed, #5b21b6);
+
+      color: white;
+      font-size: 28px;
+      font-weight: bold;
+      text-decoration: none;
+
+      box-shadow:
+        0 0 15px rgba(139,92,246,0.8),
+        inset 0 0 10px rgba(255,255,255,0.2);
+
+      transition: 0.3s;
+    }
+
+    .home-btn:hover {
+      transform: scale(1.05);
+
+      box-shadow:
+        0 0 25px rgba(139,92,246,1),
+        inset 0 0 15px rgba(255,255,255,0.3);
+    }
+
+    /* الماب */
+
+    .map {
+      position: relative;
+      height: 80vh;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+
+      padding-top: 150px;
+    }
+
+    .path {
+      position: absolute;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(transparent, #3d22a0, transparent);
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* الكواكب */
+
+    .planet {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      z-index: 2;
+      transition: 0.3s;
+    }
+
+    .planet-inner {
+      text-align: center;
+    }
+
+    /* كل الكواكب أخضر */
+
+    .unlocked {
+      background: radial-gradient(circle, #4ade80, #15803d);
+      box-shadow: 0 0 25px #4ade80;
+      cursor: pointer;
+    }
+
+    .unlocked:hover {
+      transform: scale(1.1);
+    }
+
+    .title {
+      display: block;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header class="topbar">
+
+  <h1>🪐 Numbers Planet</h1>
+
+  <div class="stars-box">
+    ⭐ <span id="starsCount">0</span>
+  </div>
+
+</header>
+
+<!-- زر الهوم فوق -->
+
+<div class="home-wrap">
+
+  <a href="index.html" class="home-btn">
+     Go To Home
+  </a>
+
+</div>
+
+<!-- الكواكب -->
+
+<main class="map">
+
+  <div class="path"></div>
+
+  <!-- Basic -->
+  <div class="planet unlocked"
+       id="basic"
+       onclick="goLevel('basic')">
+
+    <div class="planet-inner">
+      <span class="title">Basic</span>
+    </div>
+
+  </div>
+
+  <!-- Addition -->
+  <div class="planet unlocked"
+       id="addition"
+       onclick="goLevel('addition')">
+
+    <div class="planet-inner">
+      <span class="title">Addition</span>
+    </div>
+
+  </div>
+
+  <!-- Subtraction -->
+  <div class="planet unlocked"
+       id="subtraction"
+       onclick="goLevel('subtraction')">
+
+    <div class="planet-inner">
+      <span class="title">Subtraction</span>
+    </div>
+
+  </div>
+
+  <!-- Multiplication -->
+  <div class="planet unlocked"
+       id="multiplication"
+       onclick="goLevel('multiplication')">
+
+    <div class="planet-inner">
+      <span class="title">Multiplication</span>
+    </div>
+
+  </div>
+
+  <!-- Division -->
+  <div class="planet unlocked"
+       id="division"
+       onclick="goLevel('division')">
+
+    <div class="planet-inner">
+      <span class="title">Division</span>
+    </div>
+
+  </div>
+
+</main>
+
+<script>
+
+let stars = localStorage.getItem("stars") || 0;
+
+document.getElementById("starsCount").innerText = stars;
+
+
+/* التنقل بين اللفلات */
+
+function goLevel(level) {
+
+  if (level === "basic") {
+    window.location.href = "BasicLevel.html";
+  }
+
+  if (level === "addition") {
+    window.location.href = "practiceadd.html";
+  }
+
+  if (level === "subtraction") {
+    window.location.href = "PracticeSub.html";
+  }
+
+  if (level === "multiplication") {
+    window.location.href = "PracticeMulti.html";
+  }
+
+  if (level === "division") {
+    window.location.href = "PracticeDiv.html";
+  }
+
+}
+
+</script>
+
+</body>
+</html>
