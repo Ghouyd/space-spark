@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Addition Planet</title>
+
+<style>/* سبلاش */
+#splash {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background:
+    radial-gradient(circle at 30% 20%, #4c1d95, transparent 25%),
+    linear-gradient(180deg, #020617, #071b45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.splash-card {
+  text-align: center;
+  padding: 50px 80px;
+  border-radius: 35px;
+  background: rgba(39, 12, 92, .65);
+  border: 2px solid #a855f7;
+  box-shadow: 0 0 50px rgba(168,85,247,.9);
+  animation: pop .8s ease;
+}
+
+.splash-planet {
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 25%, #67e8f9, #0ea5e9 45%, #1d4ed8 75%);
+  box-shadow: 0 0 35px #38bdf8;
+  position: relative;
+}
+
+.splash-planet::before {
+  content: "1 2 3";
+  position: absolute;
+  font-size: 34px;
+  font-weight: 900;
+  top: 58px;
+  left: 31px;
+  color: white;
+  text-shadow: 0 4px #7c3aed;
+}
+
+.splash-planet::after {
+  content: "";
+  position: absolute;
+  width: 225px;
+  height: 45px;
+  border: 10px solid rgba(56,189,248,.9);
+  border-radius: 50%;
+  left: -43px;
+  top: 58px;
+  transform: rotate(-12deg);
+}
+
+.splash-card h1 {
+  font-size: 58px;
+  margin: 0;
+}
+
+.splash-card p {
+  font-size: 24px;
+}
+</style>
+</head>
+
+<body>
+
+<section id="splash">
+  <div class="splash-card">
+    <div class="splash-planet"></div>
+    <h1>Addition Level</h1>
+    <p>Let’s add and have fun!</p>
+  </div>
+</section>
+
+<div class="space-page">
+  <div class="moon-ground"></div>
+
+  <a href="practiceadd.html" class="back-btn">← Back</a>
+
+  <main class="game-wrap">
+    <header class="topbar">
+      <div class="logo">
+        <h2>SpaceSpark</h2>
+        <p>Learn • Explore • Grow</p>
+      </div>
+
+      <div class="score-pill">⭐ <span id="score">120</span></div>
+    </header>
+
+    <section class="title">
+      <p>Numbers Planet</p>
+      <h1>Addition</h1>
+      <p>Let’s add and have fun!</p>
+    </section>
+
+    <section class="game-card">
+      <div class="level_2">
+        <span>⭐ Level <span id="levelNumber">2</span></span>
+        <div class="progress">
+          <div id="progressFill" class="progress-fill"></div>
+        </div>
+        <span id="levelText">0/5</span>
+      </div>
+
+      <div class="question">
+        <div class="number-box" id="num1"></div>
+        <div class="operator">+</div>
+        <div class="number-box" id="num2"></div>
+        <div class="operator">=</div>
+        <div class="number-box qmark">?</div>
+      </div>
+
+      <div class="instruction">Choose the correct answer</div>
+      <div class="options" id="options"></div>
+      <div class="message" id="message"></div>
+    </section>
+  </main>
+</div>
+</html>
